@@ -24,7 +24,8 @@ public class UserDB {
         String url = "jdbc:postgresql://" + env("DB_HOST", "dpg-dbl9oeoae00c73bjh9q0-a.singapore-postgres.render.com")
                 + ":" + env("DB_PORT", "5432")
                 + "/" + env("DB_NAME", "emaildb")
-                + "?sslmode=" + env("DB_SSL", "require");
+                + "?sslmode=" + env("DB_SSL", "require")
+                + "&channelBinding=disable";
         return DriverManager.getConnection(url,
                 env("DB_USER", "TrungKien"),
                 env("DB_PASS", "997pQaiGcb58y1XJSX5x2twqjCJD6ysm"));   // "1234" chỉ là mặc định cho máy local
