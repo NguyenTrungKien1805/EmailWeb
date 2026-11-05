@@ -21,13 +21,13 @@ public class UserDB {
         } catch (ClassNotFoundException e) {
             throw new SQLException(e);
         }
-        String url = "jdbc:postgresql://" + env("DB_HOST", "localhost")
+        String url = "jdbc:postgresql://" + env("DB_HOST", "dpg-dbl9oeoae00c73bjh9q0-a.singapore-postgres.render.com")
                 + ":" + env("DB_PORT", "5432")
                 + "/" + env("DB_NAME", "emaildb")
-                + "?sslmode=" + env("DB_SSL", "disable");
+                + "?sslmode=" + env("DB_SSL", "require");
         return DriverManager.getConnection(url,
-                env("DB_USER", "postgres"),
-                env("DB_PASS", "1234"));   // "1234" chỉ là mặc định cho máy local
+                env("DB_USER", "TrungKien"),
+                env("DB_PASS", "997pQaiGcb58y1XJSX5x2twqjCJD6ysm"));   // "1234" chỉ là mặc định cho máy local
     }
 
     public static void insert(User user) throws SQLException {
