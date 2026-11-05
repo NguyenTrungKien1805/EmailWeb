@@ -21,15 +21,21 @@ public class UserDB {
         } catch (ClassNotFoundException e) {
             throw new SQLException(e);
         }
-        // Mặc định = máy local. Trên Render, các giá trị này đến từ biến môi trường.
-        String url = "jdbc:postgresql://" + env("DB_HOST", "localhost")
-                + ":" + env("DB_PORT", "5432")
-                + "/" + env("DB_NAME", "emaildb")
-                + "?sslmode=" + env("DB_SSL", "disable")
-                + "&channelBinding=disable";
-        return DriverManager.getConnection(url,
-                env("DB_USER", "postgres"),
-                env("DB_PASS", "1234"));
+
+        // 1. Nếu trên Render có cài DB_URL thì dùng trực tiếp
+        String dbUrl = System.getenv("DB_URL");
+        if (dbUrl != null && !dbUrl.isBlank()) {
+            return DriverManager.getConnection(dbUrl);
+        }
+
+        // 2. Dự phòng khi chạy local hoặc khai báo riêng lẻ từng biến
+        String host = env("DB_HOST", "localhost");
+        String port = env("DB_PORT", "5432");
+        String dbName = env("DB_NAME", "emaildb");
+        String ssl = env("DB_SSL", "disable");
+
+        String url = "jdbc:postgresql://" + host + ":" + port + "/" + dbName + "?sslmode=" + ssl;
+        return DriverManager.getConnection(url, env("DB_USER", "postgres"), env("DB_PASS", "1234"));
     }
 
     public static void insert(User user) throws SQLException {
