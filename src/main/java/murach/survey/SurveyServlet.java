@@ -1,4 +1,4 @@
-package murach.email;
+package murach.survey;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -11,8 +11,8 @@ import murach.business.User;
 import murach.data.UserDB;
 
 
-@WebServlet("/emailList")
-public class EmailListServlet extends HttpServlet {
+@WebServlet("/survey")
+public class Survey extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request,
